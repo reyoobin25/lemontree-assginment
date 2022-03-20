@@ -114,7 +114,7 @@ public class BoardService {
 
         // 옮겨지는 순번은 0보다 크고, 전체 리스트 수보다 작거나 같아야 한다.
         if (0 < targetId || totalCount >= targetId) {
-            // 가장 첫번째 또는 마지막으로 옮기는 경우,
+            // 가장 첫번째 또는 마지막으로 옮기는 경우
             if (1 == targetId || totalCount == targetId) {
                 listCount = (targetId-1);
                 offset = 1;
