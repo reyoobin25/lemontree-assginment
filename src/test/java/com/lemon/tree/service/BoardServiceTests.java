@@ -62,6 +62,10 @@ public class BoardServiceTests {
         assertThat(board.get(1)).isEqualTo(50.0);
     }
 
+    /**
+     * 예외상황이 발생할 수 있는 내용으로, 아래 프로세스가 통과되어야만 한다.
+     * @throws Exception
+     */
     @Test
     public void checkChangeOrderTest() throws Exception {
         // 5개 입력

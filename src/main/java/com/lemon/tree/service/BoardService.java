@@ -135,12 +135,12 @@ public class BoardService {
                 Board resultBoard = boardRepository.save(tempBoard.get());
                 return resultBoard.getId();
             } else {
-                logger.info("[changeOrder] Exception = {}", id);
-                throw new Exception();
+                logger.info("[changeOrder] id = {}", id);
+                throw new IllegalArgumentException("게시글을 찾지 못했습니다.");
             }
         } else {
             logger.info("[changeOrder] targetId = {}", targetId);
-            throw new Exception();
+            throw new IllegalArgumentException("targetId를 확인해주세요.");
         }
     }
 }
