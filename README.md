@@ -35,12 +35,29 @@
 ### 프로젝트 환경
 - Build Tool : Gradle
 - Spring Boot : 2.6.4
-- Pakaging : Jar
+- Packaging : Jar
 - Java : 11
+- port : 9192
 
 ## 과제 결과물
+### jar파일 생성
+```java
+./gradlew bootJar
+```
+
+### docker image 생성
+```java
+./gradlew bootBuildImage
+```
+
+### docker compse 실행
+```java
+docker-compose up
+```
+
+----
 ### 필요 테이블 정의
-- 테이블 생성 쿼리
+- 테이블 생성
 ```sql
 -- 추가 컬럼)
 -- updated_at : 게시글 수정 시간
@@ -65,20 +82,15 @@ CREATE TABLE `board` (
   - Resource : POST /v1/api/boards
   - Description : 게시글 추가 API
   - Parameters :
-  ```java
-    {
-      "title": "1번",
-      "contents" : "1번 내용",
-      "nick_name" : "test"
-    }
-  ```
-  - Example Request : body
-  POST http://localhost:9191/v1/api/boards
-  
-  게시글 id
-  ```java
-  1
-  ```
+  <div markdown="1">
+    
+  |parameter|Desc|type|
+  |---|---|---|
+  |title|게시글 제목|String|
+  |contents|게시글 내용|String|
+  |nick_name|작성자|String|
+  </div>
+  - return : 게시글 id
   
 </details>  
 <details>
@@ -93,10 +105,8 @@ CREATE TABLE `board` (
   |---|---|
   |page|리스트 페이지 넘버|
   </div>
-  - Example Request : 
-  GET http://localhost:9191/v1/api/boards/page=1
+  - return : 게시글 리스트(10개씩 페이징)
   
-  게시글 리스트(10개씩 페이징)
   ```java
   [
     {
@@ -125,21 +135,17 @@ CREATE TABLE `board` (
   
   - Resource : PUT /v1/api/boards/{id}
   - Description : 게시글 수정 API
-  - Parameters : body
-  ```java
-    {
-      "title": "1번 수정",
-      "contents" : "1번 내용 수정",
-      "nick_name" : "test"
-    }
-  ```
-  - Example Request : 
-  PUT http://localhost:9191/v1/api/boards/1
+  - Parameters :
+  <div markdown="1">
+    
+  |parameter|Desc|type|
+  |---|---|---|
+  |title|게시글 제목|String|
+  |contents|게시글 내용|String|
+  |nick_name|작성자|String|
+  </div>
   
-  게시글 id
-  ```java
-  1
-  ```
+  - return : 수정된 게시글 id
   
 </details> 
 <details>
@@ -147,14 +153,7 @@ CREATE TABLE `board` (
   
   - Resource : DELETE /v1/api/boards/{id}
   - Description : 게시글 삭제 API
-  - Parameters :
-  - Example Request : 
-  DELETE http://localhost:9191/v1/api/boards/1
-  
-  게시글 id
-  ```java
-  1
-  ```
+  - return : 게시글 id
   
 </details> 
 <details>
@@ -163,18 +162,14 @@ CREATE TABLE `board` (
   - Resource : POST /v1/api/board/{id}/order
   - Description : 게시글 순서 변경 API
   - Parameters : body
-  ```java
-    {
-      "target_order_id": 5
-    }
-  ```
-  - Example Request : 
-  POST http://localhost:9191/v1/api/board/1/order
+  <div markdown="1">
+    
+  |parameter|Desc|type|
+  |---|---|---|
+  |target_order_id|옮기려는 곳 순번|Integer|
+  </div>
   
-  게시글 id
-  ```java
-  1
-  ```
+  - return : 게시글 id
   
 </details> 
 
