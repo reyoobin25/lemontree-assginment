@@ -37,7 +37,6 @@
 - Spring Boot : 2.6.4
 - Packaging : Jar
 - Java : 11
-- port : 9192
 
 ## 과제 결과물
 ### jar파일 생성
@@ -54,6 +53,8 @@
 ```java
 docker-compose up
 ```
+
+http://localhost:9192
 
 ----
 ### 필요 테이블 정의
