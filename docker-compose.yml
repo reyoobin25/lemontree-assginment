@@ -1,0 +1,46 @@
+version: '3.3'
+
+networks:
+  ntalphash:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/24
+
+services:
+  mysql:
+    build:
+      context: .
+    image: mysql:8.0.22
+    restart: unless-stopped
+    container_name: mysqlsrv
+    volumes:
+      - data-volume:/var/lib/mysql
+    networks:
+      ntalphash:
+        ipv4_address: 172.20.0.2
+    ports:
+      - target: 3306
+        published: 3307
+        protocol: tcp
+        mode: host
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=lemon
+  app:
+    build:
+      context: .
+    image: tree:0.0.1-SNAPSHOT
+    depends_on:
+      - mysql
+    networks:
+      ntalphash:
+        ipv4_address: 172.20.0.3
+    ports:
+      - target: 9191
+        published: 9192
+        protocol: tcp
+        mode: host
+volumes:
+  data-volume:
